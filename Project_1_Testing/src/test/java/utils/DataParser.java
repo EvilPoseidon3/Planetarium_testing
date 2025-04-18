@@ -8,9 +8,12 @@ public class DataParser {
 
 
     public static void main(String[] args) {
-
-        File file = new File("src/test/resources/Test Data/US1_TestData.csv");
-        csvParserOrdered(file);
+        int i = 0;
+        while (i < 200) {
+            File file = new File("src/test/resources/Test Data/US4_MoonData.csv");
+            csvParserOrdered(file);
+            i++;
+        }
 
     }
 

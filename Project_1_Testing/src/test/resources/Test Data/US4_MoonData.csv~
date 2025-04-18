@@ -1,0 +1,18 @@
+﻿Io,Jupiter-Dash,PNG,✅ Pass
+Europa,Jupiter-Dash,JPEG,✅ Pass
+@Moon,Saturn9,PNG,❌ Fail
+,Saturn9,JPEG,❌ Fail
+ThisMoonNameIsWayTooLongToBeValid,Mars,PNG,❌ Fail
+Ganymede_7,Jupiter-Dash,,✅ Pass
+Callisto 3,Jupiter-Dash,JPEG,✅ Pass
+Io,Mars,,❌ Fail
+Luna_,Earth_,BMP,❌ Fail
+Moon-Alpha,Earth_,PNG,✅ Pass
+_Moonie,Saturn,PNG,✅ Pass
+-Moonlet,Saturn,PNG,✅ Pass
+Moonshadow,Saturn,JPEG,✅ Pass
+Phobos,NULL,PNG,❌ Fail
+Deimos,FakePlanet123,JPEG,❌ Fail
+Callisto,DeletedPlanet,JPEG,❌ Fail
+Ganymede,Saturn,TXT,❌ Fail
+Io,Jupiter,PNG,❌ Fail
