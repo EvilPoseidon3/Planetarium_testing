@@ -1,18 +1,16 @@
-﻿Io,Jupiter-Dash,PNG,✅ Pass
-Europa,Jupiter-Dash,JPEG,✅ Pass
-@Moon,Saturn9,PNG,❌ Fail
-,Saturn9,JPEG,❌ Fail
-ThisMoonNameIsWayTooLongToBeValid,Mars,PNG,❌ Fail
-Ganymede_7,Jupiter-Dash,,✅ Pass
-Callisto 3,Jupiter-Dash,JPEG,✅ Pass
-Io,Mars,,❌ Fail
-Luna_,Earth_,BMP,❌ Fail
-Moon-Alpha,Earth_,PNG,✅ Pass
-_Moonie,Saturn,PNG,✅ Pass
--Moonlet,Saturn,PNG,✅ Pass
-Moonshadow,Saturn,JPEG,✅ Pass
-Phobos,NULL,PNG,❌ Fail
-Deimos,FakePlanet123,JPEG,❌ Fail
-Callisto,DeletedPlanet,JPEG,❌ Fail
-Ganymede,Saturn,TXT,❌ Fail
-Io,Jupiter,PNG,❌ Fail
+﻿Io,Jupiter-Dash,PNG,void
+Europa,Jupiter-Dash,JPEG,void
+@Moon,Saturn9,PNG,Invalid moon name
+void,Saturn9,JPEG,Invalid moon name
+ThisMoonNameIsWayTooLongToBeValid,Mars,PNG,Invalid moon name
+Ganymede_7,Jupiter-Dash,void,void
+Callisto 3,Jupiter-Dash,JPEG,void
+Io,Mars,void,Invalid moon name
+Luna_,Earth_,BMP,Invalid image type
+Moon-Alpha,Earth_,PNG,void
+_Moonie,Saturn,PNG,void
+-Moonlet,Saturn,PNG,void
+Moonshadow,Saturn,JPEG,void
+Phobos,NULL,PNG,Invalid planet ID
+Deimos,FakePlanet123,JPEG,Invalid planet ID
+Ganymede,Saturn,TXT,Invalid image type
