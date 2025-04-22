@@ -20,7 +20,7 @@ Feature: user should be able to add celestial bodies to planetarium
       |_PlanetX|JohnDoe|PNG|void|
       |Earth_|John_Doe123|PNG|void|
       |Saturn9|JaneDoe|PNG|void|
-      |Neptune_2|John_Doe123||void|
+      |Neptune_2|John_Doe123|void|void|
       |Mercury Prime|John_Doe123|JPEG|void|
       |Mars|John_Doe123|PNG|void|
 
@@ -57,7 +57,7 @@ Feature: user should be able to add celestial bodies to planetarium
       Examples:
         |planet|userID|filetype|alert|
         |!Venus|John_Doe123|PNG|Invalid planet name|
-        ||John_Doe123|PNG|Invalid planet name|
+        |void|John_Doe123|PNG|Invalid planet name|
         |ThisPlanetNameIsWayTooLongToBeValid|John_Doe123|JPEG|Invalid planet name|
         |Jupiter-Dash|John_Doe123|BMP|Invalid file type|
         |Mars|JaneDoe|JPEG|Invalid planet name|
