@@ -2,13 +2,13 @@ Feature: user should be able to add celestial bodies to planetarium
 
   Background:
     Given the user has logged in successfully
-    When the user clicks on the moon_planet creation tab
 
     Scenario Outline: Happy Path Planet
+      When the user clicks on the planet creation tab
       When the user enters in valid "<planet>" name
       When the user enters a valid "<filetype>"
       When the user clicks on "text"
-      Then the table should refresh with the new data added
+      Then the table should refresh
       Then no "<alert>" should show up
       And the new data should be associated with the "<userID>"
       And the user should be on the home page
@@ -27,11 +27,12 @@ Feature: user should be able to add celestial bodies to planetarium
 
 
   Scenario Outline: Happy Path Moon
-      When the user enters in valid "<moon>" name
+      When the user clicks on the moon creation tab
+      When the user enters in valid "<moon>"
       When the user enters in valid "<planetID>"
       When the user enter in a valid "<filetype>"
       When the user clicks on "text"
-      Then the table should refresh with the new data added
+      Then the table should refresh
       And no "<alert>" should pop up
       And the user should be on the home page
 
@@ -44,15 +45,16 @@ Feature: user should be able to add celestial bodies to planetarium
       |Callisto 3|Jupiter-Dash|JPEG|void|
       |Ganymede_7|Jupiter-Dash|void|void|
       |Europa|Jupiter-Dash|JPEG|void|
-      |﻿Io|Jupiter-Dash|PNG|void|
+      |Io|Jupiter-Dash|PNG|void|
 
     Scenario Outline: Sad Path Planet
+      When the user clicks on the planet creation tab
         When the user enters in invalid "<planet>" name
         When the user enters a invalid "<filetype>"
         When the user clicks on "text"
         And Invalid "<userID>" may show up
-        Then then there should be a browser alert "<alert>"
-        And the user should be redirected to the homepage
+        Then there should be a browser alert "<alert>"
+        And the user should be on the home page
 
       Examples:
         |planet|userID|filetype|alert|
@@ -67,12 +69,13 @@ Feature: user should be able to add celestial bodies to planetarium
 
 
   Scenario Outline: Sad Path Moon
+    When the user clicks on the moon creation tab
       When the user enters in invalid "<moon>" name
       When the user enters in invalid "<planetID>"
       When the user enter in a invalid "<filetype>"
       When the user clicks on "text"
-      Then then there should be a browser alert "<alert>"
-      And the user should be redirected to the homepage
+      Then there should be a browser alert "<alert>"
+      And the user should be on the home page
 
       Examples:
         |moon|planetID|filetype|alert|

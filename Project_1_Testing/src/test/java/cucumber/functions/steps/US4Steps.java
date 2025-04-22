@@ -1,6 +1,19 @@
 package cucumber.functions.steps;
 import io.cucumber.java.en.*;
 public class US4Steps {
+
+    @When("the user clicks on the planet creation tab")
+    public void the_user_clicks_on_the_planet_creation_tab() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("the user clicks on the moon creation tab")
+    public void the_user_clicks_on_the_moon_creation_tab() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
     @When("the user enters in valid {string} name")
     public void the_user_enters_in_valid_name(String string) {
         // Write code here that turns the phrase above into concrete actions
@@ -85,11 +98,20 @@ public class US4Steps {
         throw new io.cucumber.java.PendingException();
     }
 
+    @Then("there should be a browser alert {string}")
+    public void there_should_be_a_browser_alert(String alert) {
+        // your code here
+    }
+
+    @Then("the table should refresh")
+    public void the_table_should_refresh() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
     @Given("the user has logged in successfully")
-    public void theUserHasLoggedInSuccessfully() {
+    public void the_user_has_logged_in_successfully(){
 
         throw new io.cucumber.java.PendingException();
     }
-
 
 }
