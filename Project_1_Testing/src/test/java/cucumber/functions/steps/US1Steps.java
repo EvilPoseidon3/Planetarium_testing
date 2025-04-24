@@ -1,15 +1,9 @@
 package cucumber.functions.steps;
 
 import static cucumber.functions.steps.RunnerTest.*;
-
-import POM.Loginpage;
-import io.cucumber.java.bs.A;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 
 //import static hooks.HooksUS1.*;
@@ -55,8 +49,7 @@ public class US1Steps {
         alert = driver.switchTo().alert();
         String alertMessage = alert.getText();
         alert.accept();
-        String expectedAlert = string;
-        Assert.assertEquals(expectedAlert,alertMessage);
+        Assert.assertEquals(string,alertMessage);
     }
     @Then("the user should be directed to the login page")
     public void the_user_should_be_directed_to_the_login_page() {

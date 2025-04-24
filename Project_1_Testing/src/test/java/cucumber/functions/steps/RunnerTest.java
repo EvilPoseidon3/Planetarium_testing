@@ -3,6 +3,7 @@ package cucumber.functions.steps;
 
 import POM.Loginpage;
 import POM.Registerpage;
+import POM.Homepage;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
@@ -17,7 +18,7 @@ import java.time.Duration;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/US1.feature",
+        features = "src/test/resources/features",
         glue = {"cucumber.functions.steps"},
         plugin = {"pretty","html:src/test/resources/reports/Cucumber-Report.html"}
 )
@@ -29,6 +30,7 @@ public class RunnerTest {
     protected static Loginpage loginpage;
     protected static Registerpage registerpage;
     protected static WebDriver driver;
+    protected static Homepage homepage;
 
     @BeforeClass
     public static void startUp(){
@@ -36,6 +38,7 @@ public class RunnerTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         loginpage = new Loginpage(driver,"Login Page");
         registerpage = new Registerpage(driver,"Register Page");
+        homepage = new Homepage(driver, "Home");
     }
 
     @AfterClass

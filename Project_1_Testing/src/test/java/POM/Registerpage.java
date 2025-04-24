@@ -27,7 +27,7 @@ public class Registerpage extends POMParent {
 
     public Registerpage(WebDriver driver,String title){
         super(driver,title);
-        alertWait = new WebDriverWait(driver, Duration.ofMillis(200));
+//        alertWait = new WebDriverWait(driver, Duration.ofMillis(200));
     }
 
     public String getTitle(){
@@ -54,9 +54,9 @@ public class Registerpage extends POMParent {
         loginLink.click();
     }
 
-    public void waitForAlert(){
-        alertWait.until(ExpectedConditions.alertIsPresent());
-    }
+//    public void waitForAlert(){
+//        alertWait.until(ExpectedConditions.alertIsPresent());
+//    }
 
 
 

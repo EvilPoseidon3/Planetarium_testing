@@ -28,9 +28,9 @@ public class Loginpage extends POMParent{
         driver.get(url);
     }
 
-    public String getUrl(){
-        return this.driver.getCurrentUrl();
-    }
+//    public String getUrl(){
+//        return this.driver.getCurrentUrl();
+//    }
 
     public void clickRegisterLink(){
         registrationLink.click();
