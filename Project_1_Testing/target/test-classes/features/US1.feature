@@ -1,3 +1,4 @@
+
 Feature: Be able to register with the planetarium app
 
 
@@ -23,11 +24,11 @@ Feature: Be able to register with the planetarium app
 
     Scenario Outline: Unsuccessful registration
       When the user provides an invalid "<username>" and_or "<password>"
-      Then the user should be shown an alert "<result>"
+      Then an alert should appear saying "<alert>"
       And the user should remain on the registration page
 
     Examples:
-      |username|password|result|
+      |username|password|alert|
       |123john|Abc123|Invalid username|
       |John|Abc123|Invalid username|
       |Johndoe_is_the_best_person_in_the_galaxy|Abc123|Invalid username|
