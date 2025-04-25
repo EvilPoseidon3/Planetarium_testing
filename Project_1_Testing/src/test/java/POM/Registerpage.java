@@ -34,9 +34,9 @@ public class Registerpage extends POMParent {
         return pageTitle.getText();
     }
 
-    public String getUrl(){
-        return this.driver.getCurrentUrl();
-    }
+//    public String getUrl(){
+//        return this.driver.getCurrentUrl();
+//    }
 
     public void inputSubmit(){
         submitInput.click();

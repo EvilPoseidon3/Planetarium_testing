@@ -4,33 +4,38 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import javax.print.DocFlavor;
 import java.io.File;
 import java.util.List;
 
+import static cucumber.functions.steps.RunnerTest.*;
+
 public class Homepage extends POMParent{
 
-    protected String workingName;
+    public String workingName;
+    public int listcount;
 
-    @FindBy(xpath = "//div/input[@type='text']")
+    @FindBy(xpath = "//div/input[@id = 'deleteInput']")
     private WebElement celestialBodyDelete;
     @FindBy(xpath = "//div/button[@id = 'deleteButton']")
     private WebElement deleteButton;
     @FindBy(xpath = "//div/input[@id='moonNameInput']")
     private List<WebElement> moonInput;
-    @FindBy(xpath = "//div/input[@id='orbitPlanetInput]")
+    @FindBy(xpath = "//div/input[@id='orbitedPlanetInput']")
     private List<WebElement> orbitPlanetIdInput;
     @FindBy(xpath = "//div/input[@type='file']")
     private List<WebElement> pictureUpload;
     @FindBy(xpath = "//div/input[@id='planetNameInput']")
     private List<WebElement> planetNameInput;
-    @FindBy(xpath = "//table[@id]tbody/tr")
+    @FindBy(xpath = "//table[@id = 'celestialTable']/tbody/tr")
     private List<WebElement> celestialList;
     @FindBy(xpath = "//button[@class = 'submit-button']")
     private WebElement submitButton;
-    @FindBy(xpath = "//select[@id = 'locationSelect']")
-    private WebElement selectMenu;
+    @FindBy(xpath = "//select[@id ='locationSelect']")
+    private List<WebElement> selectMenu;
 
     public Homepage(WebDriver driver, String title){
         super(driver,title);
@@ -38,19 +43,18 @@ public class Homepage extends POMParent{
 
     public void celestialBodyDeleteInput(String name){
         celestialBodyDelete.sendKeys(name);
-
     }
 
     public void clickDelete(){
         deleteButton.click();
     }
 
-    public void moonInput(String name){
-        moonInput.get(0).sendKeys();
+    public void setMoonInput(String name){
+        moonInput.get(0).sendKeys(name);
     }
 
     public void planetIdInput(String name){
-        orbitPlanetIdInput.get(0).sendKeys();
+        orbitPlanetIdInput.get(0).sendKeys(name);
     }
 
     public void uploadPicture(String absoluteFilePath){
@@ -62,27 +66,55 @@ public class Homepage extends POMParent{
     }
 
     public boolean getCelestialBodyInformation(String name){
-        for(WebElement webElement: celestialList){
-            if (webElement
-                    .findElements(By.tagName("td"))
-                    .get(3)
-                    .getText()
-                    .equals(name)){
-                return true;
+        this.waitPageLoad();
+        boolean isPresent = false;
+        List<WebElement> celestialList1 = driver.findElements(By.xpath("//table[@id = 'celestialTable']/tbody/tr"));
+        String POMname = "";
+        for(WebElement webElement: celestialList1){
+            List<WebElement> elements = webElement.findElements(By.tagName("td"));
+            if(!elements.isEmpty()) {
+                WebElement nameInTag = elements.get(2);
+                POMname = nameInTag.getText();
+                System.out.println(POMname);
+                System.out.println(name);
+            }
+            if (POMname.equals(name)) {
+                isPresent = true;
             }
         }
-        return false;
+        return isPresent;
 
     }
 
+    public String getCelestialOwnerId(String name){
+        this.waitPageLoad();
+        for (WebElement webElement: celestialList) {
+            List<WebElement> elements = webElement.findElements(By.tagName("td"));
+
+            if (!elements.isEmpty()) {
+                String targetId = elements.get(3).getText();
+                String targetName = elements.get(2).getText();
+                if (targetName.equals(name)){
+                    return targetId;
+                }
+            }
+        }
+        return null;
+    }
+
     public void clickSubmitButton(){
+        submitButton = driver.findElement(By.xpath("//button[@class = 'submit-button']"));
         submitButton.click();
     }
 
     public void selectPlanetOrMoon(String planetOrMoon){
-        Select select = new Select(selectMenu);
+        Select select = new Select(selectMenu.get(0));
         select.selectByValue(planetOrMoon);
-        workingName = planetOrMoon;
+        this.waitPageLoad();
+
+    }
+    public void setWorkingName(String name){
+        workingName = name;
     }
 
     public String getWorkingName(){
@@ -90,9 +122,13 @@ public class Homepage extends POMParent{
     }
 
 
+    public int getListcount() {
+        return listcount;
+    }
 
+    public void setListcount() {
+        this.waitPageLoad();
+        this.listcount =  celestialList.size();
 
-
-
-
+    }
 }

@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import static cucumber.functions.steps.RunnerTest.*;
 
 public class Hooks {
     // using the Cucumber Before annotation we can make our method run before each scenario
@@ -17,6 +18,7 @@ public class Hooks {
                 .build();
         HttpClient client = HttpClient.newHttpClient();
         client.send(request, HttpResponse.BodyHandlers.ofString());
+        loginpage.goToLoginPage();
     }
 
 

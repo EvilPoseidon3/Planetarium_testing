@@ -5,9 +5,9 @@ Feature: user should be able to add celestial bodies to planetarium
 
     Scenario Outline: Happy Path Planet
       When the user clicks on the planet creation tab
-      When the user enters in valid "<planet>" name
-      When the user enters a valid "<filetype>"
-      When the user clicks on "text"
+      When the user enters in planet "<planet>"
+      When the user enters a picture "<filetype>"
+      When the user clicks submit
       Then the table should refresh
       Then no "<alert>" should show up
       And the new data should be associated with the "<userID>"
@@ -15,25 +15,26 @@ Feature: user should be able to add celestial bodies to planetarium
 
       Examples:
       |planet|userID|filetype|alert|
-      |PlanetZ|JohnDoe|JPEG|void|
-      |-PlanetY|JohnDoe|JPEG|void|
-      |_PlanetX|JohnDoe|PNG|void|
-      |Earth_|John_Doe123|PNG|void|
-      |Saturn9|JaneDoe|PNG|void|
-      |Neptune_2|John_Doe123|void|void|
-      |Mercury Prime|John_Doe123|JPEG|void|
-      |Mars|John_Doe123|PNG|void|
+      |PlanetZ|1|JPEG|void|
+      |-PlanetY|1|JPEG|void|
+      |_PlanetX|1|PNG|void|
+      |Earth_|1|PNG|void|
+      |Saturn9|1|PNG|void|
+      |Neptune_2|1|void|void|
+      |Mercury Prime|1|JPEG|void|
+      |Mars|1|PNG|void|
 
 
 
   Scenario Outline: Happy Path Moon
       When the user clicks on the moon creation tab
-      When the user enters in valid "<moon>"
-      When the user enters in valid "<planetID>"
-      When the user enter in a valid "<filetype>"
-      When the user clicks on "text"
+      When the user enters in moon "<moon>"
+      When the user enters in planetId "<planetID>"
+      When the user enters a picture "<filetype>"
+      When the user clicks submit
       Then the table should refresh
       And no "<alert>" should pop up
+      And the new data should be associated with the "<userID>"
       And the user should be on the home page
 
       Examples:
@@ -49,31 +50,30 @@ Feature: user should be able to add celestial bodies to planetarium
 
     Scenario Outline: Sad Path Planet
       When the user clicks on the planet creation tab
-        When the user enters in invalid "<planet>" name
-        When the user enters a invalid "<filetype>"
-        When the user clicks on "text"
-        And Invalid "<userID>" may show up
+        When the user enters in planet "<planet>"
+        When the user enters a picture "<filetype>"
+        When the user clicks submit
         Then there should be a browser alert "<alert>"
         And the user should be on the home page
 
       Examples:
-        |planet|userID|filetype|alert|
-        |!Venus|John_Doe123|PNG|Invalid planet name|
-        |void|John_Doe123|PNG|Invalid planet name|
-        |ThisPlanetNameIsWayTooLongToBeValid|John_Doe123|JPEG|Invalid planet name|
-        |Jupiter-Dash|John_Doe123|BMP|Invalid file type|
-        |Mars|JaneDoe|JPEG|Invalid planet name|
-        |Earth|NULL|PNG|Invalid Owner|
-        |Neptune|123|PNG|Invalid Owner|
-        |Saturn|JohnDoe|TXT|Invalid file type|
+        |planet| filetype|alert|
+        |!Venus| PNG|Invalid planet name|
+        |void| PNG|Invalid planet name|
+        |ThisPlanetNameIsWayTooLongToBeValid| JPEG|Invalid planet name|
+        |Jupiter-Dash| BMP|Invalid file type|
+        |Mars| JPEG|Invalid planet name|
+        |Earth| PNG|Invalid Owner|
+        |Neptune| PNG|Invalid Owner|
+        |Saturn| TXT|Invalid file type|
 
 
   Scenario Outline: Sad Path Moon
     When the user clicks on the moon creation tab
-      When the user enters in invalid "<moon>" name
-      When the user enters in invalid "<planetID>"
-      When the user enter in a invalid "<filetype>"
-      When the user clicks on "text"
+      When the user enters in moon "<moon>"
+      When the user enters in planetId "<planetID>"
+      When the user enters a picture "<filetype>"
+      When the user clicks submit
       Then there should be a browser alert "<alert>"
       And the user should be on the home page
 
