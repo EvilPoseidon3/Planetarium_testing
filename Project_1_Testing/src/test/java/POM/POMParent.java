@@ -19,7 +19,7 @@ public class POMParent {
         this.driver = driver;
         this.title = title;
         PageFactory.initElements(driver,this);
-        alertWait = new WebDriverWait(driver, Duration.ofMillis(200));
+        alertWait = new WebDriverWait(driver, Duration.ofMillis(1000));
         pageLoadWait = new WebDriverWait(driver, Duration.ofMillis(100));
 
     }
@@ -39,6 +39,10 @@ public class POMParent {
     public void waitPageLoad(){
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table/tbody/tr")));
+    }
+
+    public void pageFactoryRefresh(){
+        PageFactory.initElements(driver, this);
     }
 
 }

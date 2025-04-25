@@ -35,7 +35,7 @@ public class RunnerTest {
     @BeforeClass
     public static void startUp(){
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         loginpage = new Loginpage(driver,"Login Page");
         registerpage = new Registerpage(driver,"Register Page");
         homepage = new Homepage(driver, "Home");

@@ -1,46 +1,77 @@
 package cucumber.functions.steps;
 
 import io.cucumber.java.en.*;
+import org.junit.Assert;
+import org.openqa.selenium.Alert;
+
+import static cucumber.functions.steps.RunnerTest.*;
+
 
 public class US5Steps {
     @Given("the user is logged in")
     public void the_user_is_logged_in() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        loginpage.goToLoginPage();
+        loginpage.enterUsername("Batman");
+        loginpage.enterPassword("Iamthenight1939");
+        loginpage.inputSubmit();
     }
-    @When("the user types in a valid celestial body")
-    public void the_user_types_in_a_valid_celestial_body() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
+
     @When("clicks on the delete button")
     public void clicks_on_the_delete_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        homepage.setListcount();
+      homepage.clickDelete();
     }
-    @Then("the corresponding celestial body should be removed")
-    public void the_corresponding_celestial_body_should_be_removed() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+
+    @When("the user types in an invalid {string} body")
+    public void the_user_types_in_an_invalid_body(String string) {
+        homepage.celestialBodyDeleteInput("FlatEarth");
     }
-    @Then("the table should update")
-    public void the_table_should_update() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-    @When("the user types in an invalid celestial body")
-    public void the_user_types_in_an_invalid_celestial_body() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
+
     @Then("an alert message saying {string} should be shown")
     public void an_alert_message_saying_should_be_shown(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Alert alert = null;
+        homepage.waitForAlert();
+        alert = driver.switchTo().alert();
+        String alertText = alert.getText();
+        alert.dismiss();
+        Assert.assertEquals(string,alertText);
     }
     @Then("the user should stay on homepage")
     public void the_user_should_stay_on_homepage() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+      String url = homepage.getUrl();
+
+      Assert.assertTrue(url.contains("planetarium"));
+    }
+
+    @When("the user types in a valid planet body")
+    public void the_user_types_in_a_valid_planet_body() {
+        homepage.selectPlanetOrMoon("planet");
+        homepage.waitPageLoad();
+        homepage.celestialBodyDeleteInput("Earth");
+    }
+
+    @Then("the corresponding planet and moon should be removed")
+    public void the_corresponding_planet_and_moon_should_be_removed() {
+        int before = homepage.getListcount();
+        homepage.setListcount();
+        System.out.println("this is the before:"+before+"  ---This is the after:"+homepage.getListcount());
+        Assert.assertEquals(1, homepage.getListcount());
+    }
+
+    @When("the user types in a valid moon body")
+    public void the_user_types_in_a_valid_moon_body() {
+        homepage.selectPlanetOrMoon("moon");
+        homepage.waitPageLoad();
+     homepage.celestialBodyDeleteInput("Luna");
+
+    }
+
+    @Then("the corresponding moon should be removed")
+    public void the_corresponding_moon_should_be_removed() {
+        int before = homepage.getListcount();
+        homepage.setListcount();
+        System.out.println("this is the before:"+before+"  ---This is the after:"+homepage.getListcount());
+        Assert.assertTrue(before > homepage.getListcount());
     }
 }

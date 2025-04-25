@@ -5,10 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.print.DocFlavor;
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
 
 import static cucumber.functions.steps.RunnerTest.*;
@@ -111,6 +114,7 @@ public class Homepage extends POMParent{
         Select select = new Select(selectMenu.get(0));
         select.selectByValue(planetOrMoon);
         this.waitPageLoad();
+        PageFactory.initElements(driver,this);
 
     }
     public void setWorkingName(String name){
@@ -128,7 +132,17 @@ public class Homepage extends POMParent{
 
     public void setListcount() {
         this.waitPageLoad();
+        pageFactoryRefresh();
         this.listcount =  celestialList.size();
 
     }
+
+    public void waitForPicture(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/input[@type = 'file']")));
+
+    }
+
+
+
 }

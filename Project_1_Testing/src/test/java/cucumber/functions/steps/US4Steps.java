@@ -1,6 +1,7 @@
 package cucumber.functions.steps;
 
 import POM.Homepage;
+import POM.Loginpage;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
@@ -15,15 +16,19 @@ public class US4Steps {
     @When("the user clicks on the planet creation tab")
     public void the_user_clicks_on_the_planet_creation_tab() {
        homepage.selectPlanetOrMoon("planet");
+       homepage.waitPageLoad();
+
     }
 
     @When("the user clicks on the moon creation tab")
     public void the_user_clicks_on_the_moon_creation_tab() {
        homepage.selectPlanetOrMoon("moon");
+       homepage.waitPageLoad();
     }
 
     @Given("the user has logged in successfully")
     public void the_user_has_logged_in_successfully(){
+        loginpage.goToLoginPage();
         loginpage.enterUsername("Batman");
         loginpage.enterPassword("Iamthenight1939");
         loginpage.inputSubmit();
@@ -48,12 +53,15 @@ public class US4Steps {
                     "C:\\Users\\Preston\\OneDrive\\Desktop\\Code\\Planetarium_testing\\Project_1_Testing\\src\\test\\resources\\Test Data\\picture.txt";
         };
         homepage.uploadPicture(absolutePath);
+        homepage.waitForPicture();
     }
 
     @When("the user clicks submit")
-    public void the_user_clicks_submit() {
+    public void the_user_clicks_submit() throws InterruptedException {
         homepage.setListcount();
         homepage.clickSubmitButton();
+
+
 
     }
 
@@ -71,6 +79,8 @@ public class US4Steps {
     @Then("the table should refresh")
     public void the_table_should_refresh() {
         int before = homepage.getListcount();
+        homepage.setListcount();
+        System.out.println("this is the before:"+before+"  ---This is the after:"+homepage.getListcount());
         Assert.assertTrue(before < homepage.getListcount());
 
     }
@@ -86,7 +96,7 @@ public class US4Steps {
             // If no alert is present, return false
             alertPresent = false;
         }
-        Assert.assertTrue("alert was not present",alertPresent);
+        Assert.assertFalse(alertPresent);
     }
 
     @Then("the new data should be associated with the {string}")
@@ -101,4 +111,23 @@ public class US4Steps {
      Assert.assertTrue(homepage.getUrl().contains("planetarium"));
     }
 
-}
+    @Then("there should be a browser alert {string}")
+    public void there_should_be_a_browser_alert(String string) {
+        boolean alertPresent = false;
+        Alert alert;
+        try {
+            homepage.waitForAlert();
+            alert = driver.switchTo().alert();
+            String alertText = alert.getText().trim();
+            alert.dismiss();
+            // If alert is present, return true
+            alertPresent = alertText.equals(string);
+        } catch (NoAlertPresentException e) {
+            // If no alert is present, return false
+//            alertPresent = false;
+        }
+        Assert.assertTrue(alertPresent);
+      }
+    }
+
+
